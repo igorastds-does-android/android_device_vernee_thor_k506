@@ -32,12 +32,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libbt-vendor
 
-# Keyboard layout
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
-    $(LOCAL_PATH)/configs/ACCDET.kl:system/usr/keylayout/ACCDET.kl \
-    $(LOCAL_PATH)/configs/AVRCP.kl:system/usr/keylayout/AVRCP.kl
-
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/enableswap.sh:root/enableswap.sh \
@@ -195,15 +189,9 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     wpa_supplicant
-
-PRODUCT_COPY_FILES += \
-    vendor/vernee/thor_k506/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    vendor/vernee/thor_k506/prebuilt/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    vendor/vernee/thor_k506/prebuilt/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 	
 # Configs
 PRODUCT_COPY_FILES += \
-    vendor/vernee/thor_k506/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
     vendor/vernee/thor_k506/prebuilt/etc/ecc_list.xml:system/etc/ecc_list.xml \
     vendor/vernee/thor_k506/prebuilt/etc/spn-conf.xml:system/etc/spn-conf.xml
 
