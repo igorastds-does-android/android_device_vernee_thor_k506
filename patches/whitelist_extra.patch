@@ -1,0 +1,17 @@
+diff --git a/core/jni/fd_utils-inl-extra.h b/core/jni/fd_utils-inl-extra.h
+index 993c320..b9b506d 100644
+--- a/core/jni/fd_utils-inl-extra.h
++++ b/core/jni/fd_utils-inl-extra.h
+@@ -14,11 +14,8 @@
+  * limitations under the License.
+  */
+ 
+-/*
+ #define PATH_WHITELIST_EXTRA_H \
+-    "/proc/apid", \
+-    "/proc/aprf",
+-*/
++    "/proc/ged",
+ 
+ // Overload this file in your device specific config if you need
+ // to add extra whitelisted paths.
