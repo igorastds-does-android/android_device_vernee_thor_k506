@@ -17,16 +17,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lights.mt6753
 
-# Audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_device.xml:system/etc/audio_device.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/audio/a2dp_audio_policy_configuration.xml:/system/etc/a2dp_audio_policy_configuration.xml
-
 # Media
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-	$(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+	$(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:system/etc/media_codecs_mediatek_audio.xml \
+    $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:system/etc/media_codecs_mediatek_video.xml \
+    $(LOCAL_PATH)/configs/mtk_omx_core.cfg:system/etc/mtk_omx_core.cfg \
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -55,11 +53,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/audioserver.rc:/system/etc/init/audioserver.rc
         
-
-# TWRP
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/etc/twrp.fstab:recovery/root/etc/twrp.fstab
-
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal/.ht120.mtc:system/etc/.tp/.ht120.mtc \
@@ -83,12 +76,15 @@ PRODUCT_PACKAGES += \
     libion
 
 # GPS
-PRODUCT_COPY_FILES += \
-    vendor/vernee/thor_k506/prebuilt/etc/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
-
-# Gello
 PRODUCT_PACKAGES += \
-    Gello
+    libcurl
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
+	
+# Gello
+#PRODUCT_PACKAGES += \
+#    Gello
 
 # Snap
 PRODUCT_PACKAGES += \
@@ -166,11 +162,18 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.a2dp.default \
     audio.usb.default \
+	libaudiopolicymanagerdefault \
     libtinyalsa \
     libtinycompress \
     libtinymix \
-    libtinyxml
-
+    libtinyxml \
+	libfs_mgr
+	
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_device.xml:system/etc/audio_device.xml \
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/a2dp_audio_policy_configuration.xml:/system/etc/a2dp_audio_policy_configuration.xml
+	
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:/system/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:/system/etc/default_volume_tables.xml \
@@ -188,7 +191,14 @@ PRODUCT_PACKAGES += \
     lib_driver_cmd_mt66xx \
     libwpa_client \
     hostapd \
+	dhcpcd.conf \
     wpa_supplicant
+	
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/WMT_SOC.cfg:system/etc/firmware/WMT_SOC.cfg \
+    $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 	
 # Configs
 PRODUCT_COPY_FILES += \
@@ -199,6 +209,31 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     messaging \
     Stk
+	
+# Power
+PRODUCT_PACKAGES += \
+    power.default \
+    power.mt6735
+
+# Radio dependencies
+PRODUCT_PACKAGES += \
+    muxreport \
+    terservice
+	
+# Charger Mode
+PRODUCT_PACKAGES += \
+    charger_res_images
+
+ifneq ($(TARGET_BUILD_VARIANT), user)
+# Mediatek logging service
+PRODUCT_PACKAGES += \
+    MTKLogger \
+    emdlogger1 \
+    mdlogger \
+    mobile_log_d \
+    netdiag \
+    tcpdump
+endif
 
 # Vendor
 $(call inherit-product, vendor/vernee/thor_k506/thor_k506-vendor.mk)
