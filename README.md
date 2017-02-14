@@ -1,9 +1,23 @@
-Working:
-Bluetooth
-Audio
+## Working:
+* Booting
+* Bluetooth
+* Touch
+* Vibration
+* Audio Speaker
 
-Not working:
-WiFi
-RIL
-Camera
-GPS
+## Broken/Bugs
+* WiFi
+* Camera
+* RIL
+* Torch
+* Fingerprint
+
+## To be checked
+* FM Radio
+* Headphones
+* AudioFx
+* Sensor
+* Gyro
+* Rotation
+* Panorama
+* MicroSD
